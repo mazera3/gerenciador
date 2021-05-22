@@ -1,4 +1,7 @@
 <h1 align="center">O DESAFIO</h1>
+<h1 align="center">
+  <img alt="cadastro" title="#Cadastro" src="./assets/logo.png" />
+</h1>
 
 # Considere os seguintes critérios fictícios para desenvolver sistema Gerenciador de Operações:
 
