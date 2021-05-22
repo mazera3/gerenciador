@@ -1,22 +1,24 @@
-# O DESAFIO: Considere os seguintes critérios fictícios para desenvolver sistema Gerenciador de Operações:
+<h1 align="center">O DESAFIO</h1>
+
+# Considere os seguintes critérios fictícios para desenvolver sistema Gerenciador de Operações:
 
 Crie um sistema que permita o controle de operações. O cadastro deverá conter os 
 seguintes dados:
 
-nome do clientea
-moeda de origem
-moeda de destino
-data da operação
-valor original
-valor convertido
-taxa cobrada
+- nome do clientea
+- moeda de origem
+- moeda de destino
+- data da operação
+- valor original
+- valor convertido
+- taxa cobrada
 
 O sistema fornecerá os seguintes relatórios:
-lista de operações
-valor total das operações
-valor total das taxas cobradas
-Os relatórios poderão ser filtrados por intervalo de tempo e cliente.
-O valor de conversão de cada moeda para Reais poderá ser definido no código-fonte 
+- lista de operações
+- valor total das operações
+- valor total das taxas cobradas
+- Os relatórios poderão ser filtrados por intervalo de tempo e cliente.
+- O valor de conversão de cada moeda para Reais poderá ser definido no código-fonte 
 ou cadastrado pelo usuário do sistema. O cadastro de valores de conversão garantirá 
 pontos extras na avaliação.
 
@@ -65,3 +67,9 @@ Pode ser feito em qualquer linguagem de programação.
 - criar um dirotorio chamado: gerenciador no diretório de leitura do apache.
 - Copiar: código fonte para o diretório. (https://github.com/mazera3/desafio.git)
 - abrir no navegador o endereço: http://localhost/gerenciador
+
+### Desenvolvimento Atual
+
+- [x] Cadastro de clientes
+- [x] Lista de operações
+- [ ] Filtros
