@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 21/05/2021 às 17:22
+-- Tempo de geração: 22/05/2021 às 12:50
 -- Versão do servidor: 8.0.25-0ubuntu0.20.04.1
 -- Versão do PHP: 7.4.16
 
@@ -30,16 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `operacoes` (
   `id` int NOT NULL,
-  `nome` varchar(240) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `moeda_origem` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `moeda_destino` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_operacao` datetime NOT NULL,
-  `valor_original` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `valor_convertido` varchar(140) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `taxa` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nome` varchar(240) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `moeda_origem` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `moeda_destino` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data_operacao` date DEFAULT NULL,
+  `valor_original` decimal(10,2) DEFAULT NULL,
+  `valor_convertido` decimal(10,2) DEFAULT NULL,
+  `taxa` decimal(10,4) DEFAULT NULL,
   `created` timestamp NOT NULL,
   `modified` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `operacoes`
+--
+
+INSERT INTO `operacoes` (`id`, `nome`, `moeda_origem`, `moeda_destino`, `data_operacao`, `valor_original`, `valor_convertido`, `taxa`, `created`, `modified`) VALUES
+(1, 'Teste 1', 'Real (BRL)', 'Renminbi (CNY)', '2021-05-22', '100.00', '114.94', '0.8700', '2021-05-22 14:48:36', NULL);
 
 --
 -- Índices de tabelas apagadas
@@ -59,7 +66,7 @@ ALTER TABLE `operacoes`
 -- AUTO_INCREMENT de tabela `operacoes`
 --
 ALTER TABLE `operacoes`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

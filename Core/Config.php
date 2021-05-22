@@ -7,8 +7,8 @@ ob_start();
 //Credenciais de acesso ao BD
 
 define('HOST', 'localhost');
-define('USER', 'mazera');
-define('PASS', 'mazera');
+define('USER', 'root');
+define('PASS', '');
 define('DBNAME', 'gerenciador');
 define('PORT', 3308);
 
