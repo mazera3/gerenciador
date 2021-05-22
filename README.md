@@ -65,7 +65,7 @@ Pode ser feito em qualquer linguagem de programação.
 ## Importar a tabela e os arquivos fonte:
 - Importar: operacoes.sql
 - criar um dirotorio chamado: gerenciador no diretório de leitura do apache.
-- Copiar: código fonte para o diretório. (https://github.com/mazera3/desafio.git)
+- Copiar: código fonte para o diretório. (https://github.com/mazera3/gerenciador.git)
 - abrir no navegador o endereço: http://localhost/gerenciador
 
 ### Desenvolvimento Atual
