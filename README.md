@@ -75,4 +75,4 @@ Pode ser feito em qualquer linguagem de programação.
 
 - [x] Cadastro de clientes
 - [x] Lista de operações
-- [ ] Filtros
+- [x] Filtros
