@@ -1,4 +1,7 @@
 <?php
+/* Habilita a exibição de erros */
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 include_once './Core/Nave.php';
 include_once './Core/Header.php';
 include_once './Core/Config.php';
@@ -9,6 +12,8 @@ include_once './Core/Config.php';
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
     }
+    $nome = filter_input(INPUT_POST, "nome");
+    $data_operacao = filter_input(INPUT_POST, "data_operacao");
     ?>
     <div class="d-flex">
         <div class="mr-auto p-2">
@@ -17,24 +22,40 @@ include_once './Core/Config.php';
     </div>
     <div class="row">
         <div class="col-6">
-            <form method="POST" action="">
-                <label>Filtro</label>
-                <select class="custom-select" name="nome">
-                    <option selected>Nome</option>
-                    <option value="">Teste 1</option>
-                </select>
-                <input name="Filtrar" type="submit" class="btn btn-primary mt-3" value="Filtrar">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" name="nome">
+                    <input name="Nome" type="submit" class="btn btn-outline-primary" value="Buscar Nome">
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <div class="form-group">
+                    <label>Data da Operacao</label>
+                    <input type="text" name="data_operacao">
+                    <input name="Data" type="submit" class="btn btn-outline-primary" value="Buscar Data">
+                </div>
             </form>
         </div>
     </div>
     <?php
-    $nome = $_POST["nome"];
-    $sql = $conn->prepare("SELECT nome FROM operacoes WHERE nome = :nome");
-    $sql->bindParam(':nome', $nome, PDO::PARAM_STR);
-    $sql->execute();
-    $linha = $sql->fetch(PDO::FETCH_ASSOC);
+    $data_atual = date('Y-m-d');
+    if ($nome) {
+        $stmt = $conn->prepare("SELECT * FROM operacoes WHERE nome LIKE '%$nome%'");
+        $stmt->execute();
+    }
+    if ($data_operacao) {
+        $stmt = $conn->prepare("SELECT * FROM operacoes WHERE data_operacao BETWEEN '$data_operacao' AND '$data_atual'");
+        $stmt->execute();
+    }
+    if (!$nome and !$data_operacao) {
+        $stmt = $conn->prepare('SELECT * FROM operacoes');
+        $stmt->execute();
+    }
     ?>
-    <table class="table table-striped">
+    <table class="table table-striped mt-3">
         <thead>
             <tr class="text-center">
                 <th>ID</th>
@@ -46,12 +67,11 @@ include_once './Core/Config.php';
                 <th>Valor Convertido</th>
                 <th>Taxa</th>
                 <th>Criado</th>
-                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            while ($row = $stmt->fetch()) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo '<tr class="text-center">';
                 echo '<th scope="row">' . $row['id'] . '</th>';
                 echo '<td>' . $row['nome'] . '</td>';
@@ -62,7 +82,6 @@ include_once './Core/Config.php';
                 echo '<td>' . $row['valor_convertido'] . '</td>';
                 echo '<td>' . $row['taxa'] . '</td>';
                 echo '<td>' . $row['created'] . '</td>';
-                echo "<td><a href='./Model/Excluir.php?id=" . $row['id'] . "' class='btn btn-outline-danger btn-sm'>Apagar</a> '</td>";
                 echo '</tr>';
             }
             ?>
